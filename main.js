@@ -1,4 +1,6 @@
-///////////////////////// CLOSURES
+// CLOSURES, IIFE, WHAT IS SCOPE, LEXICAL/STATIC SCOPE, function methods(call, apply, bind, toString), CURRYING
+
+////////////////////////////////////////////////// CLOSURES
 // Initiate counter
 
 // // Function to increment counter
@@ -16,7 +18,7 @@
 // console.log(add());
 // console.log(add());
 
-///////////////////////// SELF EXECUTING/INVOKING FUNCTION or Immediately Invoked Function Expression (IIFE)
+////////////////////////////////////////////////// SELF EXECUTING/INVOKING FUNCTION or Immediately Invoked Function Expression (IIFE)
 //// Run one time only just like in above example
 //// after execution we loose the reference to function unlike named functions whose declared name is their reference from which we can call that function again
 //// Declaraion Method 1
@@ -44,14 +46,14 @@
 
 // console.log(module);
 
-///////////////////////// WHAT IS SCOPE
+////////////////////////////////////////////////// WHAT IS SCOPE
 // Scope refers to the area where an item (such as a function or variable) is visible and accessible to other code.
 
 // Scope means area, space, or region.
 // Global scope means global space or a public space.
 // Local scope means a local region or a restricted region.
 
-///////////////////////// LEXICAL/STATIC SCOPE
+////////////////////////////////////////////////// LEXICAL/STATIC SCOPE
 //// Lexical scope is a variable defined outside your scope or upper scope is automatically available inside your scope which means you don't need to pass it
 
 //// Example 1
@@ -134,7 +136,7 @@
 // myName’s lexical scope is the global scope because we defined myName in the global environment.
 // name’s lexical scope is getName()’s local environment because getName() is name’s definition space.
 
-///////////////////////// call, apply, bind, toString
+////////////////////////////////////////////////// call, apply, bind, toString
 //// Call is slightly faster in performance than Apply.
 //// cannot bind context to arrow function, but can pass all other arguments to call, apply and bind
 
@@ -175,3 +177,76 @@
 //     console.log(`Array index ${i + 1} is: `, this.toString());
 //   }.call(arr[i])); // specifying this to arr[i]
 // }
+
+////////////////////////////////////////////////// CURRYING
+// It is a technique in functional programming, transformation of the function of multiple arguments into several functions of a single argument in sequence.
+// Currying allows us to easily get partials
+// Currying will make your code easier to refactor
+// It helps to create a higher-order function.
+// The currying requires the function to have a fixed number of arguments.
+// The main benefit of currying is when you need to use the same call with some of the same parameters a lot i.e it helps to avoid passing the same variable again and again. In these situations, currying becomes a good technique to use.
+// https://javascript.info/currying-partials
+
+//// EXAMPLE 1
+// function curry(f) {
+//   console.log(f, f.length);
+//   return function (a) {
+//     return function (b) {
+//       return a + b;
+//     };
+//   };
+// }
+
+// const sum = (a, b) => {
+//   return a + b;
+// };
+
+// // console.log(sum(1, 2, 3));
+
+// const curriedSum = curry(sum);
+// console.log(curriedSum(1)(2)); // 2 partials
+
+//// EXAMPLE 2
+// var _ = require('lodash');
+
+// const sum = (a, b, c) => {
+//   return a + b + c;
+// };
+
+// // console.log(sum(1, 2, 3)); // 6
+
+// const curriedSum2 = _.curry(sum);
+// console.log(curriedSum2(1, 2, 3)); // 6 - still callable normally
+// console.log(curriedSum2(1)(2, 3)); // 6 - currying of 1st arg
+// console.log(curriedSum2(1)(2)(3)); // // 6 - full currying
+
+//// Example 3 (Manual currying of Example 2) - Advanced currying implementation
+// const sum = (a, b, c) => {
+//   return a + b + c;
+// };
+
+// const curry = (f) => {
+//   return function curried(...args) {
+//     if (args.length >= f.length) {
+//       // check can also be '===' instead of '>='
+//       return f.apply(this, args);
+//     } else {
+//       return function (...args2) {
+//         return curried.apply(this, args.concat(args2));
+//       };
+//     }
+//   };
+// };
+
+// const curriedSum3 = curry(sum);
+// console.log(curriedSum3(1, 2, 3));
+// console.log(curriedSum3(1)(2, 3));
+// console.log(curriedSum3(1)(2)(3));
+
+// const funcFirst = curriedSum3(5); // fixing 1 arg for other calls instead of calling same argument again and again
+// console.log(funcFirst(6)(4));
+// console.log(funcFirst(3)(8));
+// console.log(funcFirst(5)(2));
+// The main benefit of currying is when you need to use the same call with some of the same parameters a lot i.e it helps to avoid passing the same variable again and again. In these situations, currying becomes a good technique to use.
+
+//////////////////////////////////////////////////
