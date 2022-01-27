@@ -1,4 +1,4 @@
-// CLOSURES, IIFE, WHAT IS SCOPE, LEXICAL/STATIC SCOPE, function methods(call, apply, bind, toString), CURRYING
+// CLOSURES, IIFE, WHAT IS SCOPE, LEXICAL/STATIC SCOPE, function methods(call, apply, bind, toString), CURRYING, hasOwnProperty
 
 ////////////////////////////////////////////////// CLOSURES
 // Initiate counter
@@ -220,7 +220,8 @@
 // console.log(curriedSum2(1)(2, 3)); // 6 - currying of 1st arg
 // console.log(curriedSum2(1)(2)(3)); // // 6 - full currying
 
-//// Example 3 (Manual currying of Example 2) - Advanced currying implementation
+//// Example 3
+// (Manual currying of Example 2) - Advanced currying implementation
 // const sum = (a, b, c) => {
 //   return a + b + c;
 // };
@@ -249,4 +250,75 @@
 // console.log(funcFirst(5)(2));
 // The main benefit of currying is when you need to use the same call with some of the same parameters a lot i.e it helps to avoid passing the same variable again and again. In these situations, currying becomes a good technique to use.
 
-//////////////////////////////////////////////////
+//// EXAMPLE 4
+// Infinite currying...
+// let sum = function (a) {
+//   return function (b) {
+//     if (b) return sum(a + b);
+//     return a;
+//   };
+// };
+
+// //Shorthand syntax of above code
+// let sum1 = (a) => (b) => b ? sum(a + b) : a;
+
+// console.log(sum(1)(2)(3)(4)()); //10
+
+//// EXAMPLE 5
+// achieve curring using bind
+// function sum(a, b) {
+//   return a + b;
+// }
+
+// const currySum = sum.bind(this, 1);
+// console.log(currySum(2));
+
+////////////////////////////////////////////////// hasOwnProperty
+// hasOwnProperty can be called on any object and tells whether passed property exists or not
+// hasOwnProperty method does not check if the property exists in the object's prototype chain; the property must be a member of the object itself.
+
+// const x = {
+//   y: 10,
+// };
+
+// console.log(x.hasOwnProperty('y')); // true
+// console.log(x.hasOwnProperty('z')); // false
+
+// console.log(Object.prototype.hasOwnProperty('toString')); //true because in above snapshot you can see, that there is a function toString in meta-information
+// console.log(Object);
+
+// // hasOwnProperty method does not check if the property exists in the object's prototype chain; the property must be a member of the object itself.
+// var s = new String('Sample');
+// console.log(s.hasOwnProperty('split')); // false
+// console.log(String.prototype.hasOwnProperty('split')); // true
+
+//// 1 more Example
+// function Person(name, city) {
+//   this.name = name;
+//   this.city = city;
+// }
+
+// Person.prototype.age = 25;
+
+// const willem = new Person('Willem', 'Groningen');
+
+// for (let trait in willem) {
+//   console.log(trait, willem[trait]); // This loops through all properties, including the prototype
+// }
+
+// console.log('\n');
+
+// for (let trait in willem) {
+//   if (willem.hasOwnProperty(trait)) {
+//     // This loops only through 'own' properties of the object
+//     console.log(trait, willem[trait]);
+//   }
+// }
+
+// console.log('\n');
+
+// for (const trait in willem) {
+//   if (Object.hasOwnProperty.call(willem, trait)) {
+//     console.log('last', willem[trait]);
+//   }
+// }
