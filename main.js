@@ -88,9 +88,9 @@
 //   console.log(b); // 2
 //   function inner() {
 //     console.log('b', b); // undefined because b is redeclared in inner function and hoisting concept is applied otherwise it would be 2
-//     console.log('c', c); // 5
-//     b++; // NAN because b is undefined
-//     console.log(b); // 2
+//     console.log('c', c); // 12
+//     b++;
+//     console.log(b); // NAN because b is undefined
 //     var b = 3;
 //     console.log(b); // 3
 //   }
@@ -151,9 +151,9 @@
 // function introduce(name, interest) {
 //   console.log("Hi! I'm " + name + ' and I like ' + interest + '.');
 //   console.log('The value of this is ' + this + '.'); // this is 1st argument of apply, call and bind
-// }
+// } // in a function this represents global object or window (in browser case), if nothing is called, i.e; apply, call, bind
 
-// introduce('Hammad', 'Coding'); // the way you usually call it
+// // introduce('Hammad', 'Coding'); // the way you usually call it
 // // pass the arguments one by one after the context
 // // introduce.call(window, 'Batman', 'to save Gotham'); // context is window - (error) window is not defined
 // introduce.apply('Hi', ['Bruce Wayne', 'businesses']); // context is 'Hi'
