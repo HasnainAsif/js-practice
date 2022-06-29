@@ -2,6 +2,7 @@
 // Write a function called same, which accepts 2 arrays. The function should return true if every value in the array
 // has its corresponding value squared in the second array. The frequency of the values must be the same.
 
+// inputs:
 // same([1,2,3], [4,1,9]) -- output --> true
 // same([1,2,3], [1,9]) -- output --> false
 // same([1,2,1], [4,4,1]) -- output --> false // must be same frequency
@@ -59,64 +60,114 @@
 //       return false;
 //     }
 
-//     arr2.splice(correctIndex, 1); // if element has matched, delete element to prevent duplicate check
+//     arr2.splice(correctIndex, 1); // if elements have matched, delete element to prevent duplicate check
 //   }
 //   return true;
 // }
 // console.log(same([1, 2, 3, 2], [4, 1, 9, 1]));
 
-////////////////////////////////////// EXAMPLE #2 (FInd closest element to zero)
-//-- Find element from array closest to zero and if multiple items matches, get greater one
+//-- Other way with Better Big-O time
+// No nested loop involve
+// function same(arr1, arr2) {
+//   if (arr1.length !== arr2.length) {
+//     return false;
+//   }
 
-// INPUT and OUTPUT:
-// 5 (length of elements)
-// 0 2 3 4 5 (elements)
-// 0 (output)
+//   let frequencyCounter1 = {};
+//   let frequencyCounter2 = {};
+//   for (const val of arr1) {
+//     // frequencyCounter1[val] = frequencyCounter1[val] + 1 || 1; // undefined + 1 = NaN
+//     frequencyCounter1[val] = (frequencyCounter1[val] || 0) + 1;
+//   }
+//   for (const val of arr2) {
+//     frequencyCounter2[val] = (frequencyCounter2[val] || 0) + 1;
+//   }
 
-// 100
-// -99 99 -98 98 -97 97 -96 96 -95 95 -94 94 -93 93 -92 92 -91 91 -90 90 -89 89 -88 88 -87 87 -86 86 -85 85 -84 84 -83 83 -82 82 -81 81 -80 80 -79 79 -78 78 -77 77 -76 76 -75 75 -74 74 -73 73 -72 72 -71 71 -70 70 -69 69 -68 68 -67 67 -66 66 -65 65 -64 64 -63 63 -62 62 -61 61 -60 60 -59 59 -58 58 -57 57 -56 56 -55 55 -54 54 -53 53 -52 52 -51 51 -50 50
-// 50
+//   for (const key in frequencyCounter1) {
+//     const value = frequencyCounter1[key];
 
-// 100
-// 99 -99 98 -98 97 -97 96 -96 95 -95 94 -94 93 -93 92 -92 91 -91 90 -90 89 -89 88 -88 87 -87 86 -86 85 -85 84 -84 83 -83 82 -82 81 -81 80 -80 79 -79 78 -78 77 -77 76 -76 75 -75 74 -74 73 -73 72 -72 71 -71 70 -70 69 -69 68 -68 67 -67 66 -66 65 -65 64 -64 63 -63 62 -62 61 -61 60 -60 59 -59 58 -58 57 -57 56 -56 55 -55 54 -54 53 -53 52 -52 51 -51 50 -50
-// 50
+//     // console.log(key ** 2 in frequencyCounter2);
+
+//     if (!(key ** 2 in frequencyCounter2)) { // check if power of key
+//       return false;
+//     }
+
+//     if (frequencyCounter1[key] != frequencyCounter2[key ** 2]) {
+//       return false;
+//     }
+//   }
+
+//   return true;
+// }
+// console.log(same([1, 2, 3], [4, 1, 9]));
+// console.log(same([1, 2, 3, 2], [4, 1, 9, 1]));
+
+////////////////////////////////////// EXAMPLE #
+// Write a function to check if second string is anagram of first one
+
+// validAnagram('','') // true
+// validAnagram('aaz','zza') // false
+// validAnagram('anagram','nagaram') // true
+// validAnagram('rat','car') // false
+// validAnagram('awesome','awesom') // false
+// validAnagram('qwerty','qeywrt') // true
+// validAnagram('texttwisttime','timetwisttext') // true
 
 //-- Solution
-// // mark first element as closest to zero
-// // loop through from 2nd element and if it is more closer than previous one mark 2nd element as closest
-// // chech the difference of element from 0, to check how much close it is to 0
-// Note: Difference of each element from 0 is 'element' itself
+// const validAnagram = (string1, string2) => {
+//   const arr1 = string1.split('');
+//   const arr2 = string2.split('');
 
-// const len = 5;
-// const arr = '0 2 3 4 5'.split(' ');
-
-// let closest = arr[0];
-// for (let i = 1; i < len; i++) {
-//   const element = arr[i];
-
-//   if (Math.abs(element) === Math.abs(closest)) {
-//     if (element > closest) {
-//       closest = element;
-//     }
-//   } else if (Math.abs(element) < Math.abs(closest)) {
-//     closest = element;
+//   if (arr1.length !== arr2.length) {
+//     return false;
 //   }
-// }
 
-// console.log(closest);
+//   for (const element1 of arr1) {
+//     const matchedIdx = arr2.indexOf(element1);
+//     if (matchedIdx === -1) {
+//       return false;
+//     }
 
-////////////////////////////////////// EXAMPLE ## (Sort Array -- Insertion sort)
-var numArray = [140000, 104, 99];
-for (let i = 0; i < numArray.length - 1; i++) {
-  let minIdx = i;
-  for (let j = i + 1; j < numArray.length; j++) {
-    if (numArray[j] < numArray[minIdx]) {
-      minIdx = j;
+//     arr2.splice(matchedIdx, 1); // delete matched element to avoid duplicate checks
+//   }
+
+//   //   if (arr2.length === 0) {
+//   //     return true;
+//   //   } else {
+//   //     return false;
+//   //   }
+//   return true;
+// };
+// console.log(validAnagram('aaz', 'zza'));
+
+//-- Other way with Better Big-O time
+// No nested loop involve
+const validAnagram = (string1, string2) => {
+  if (string1.length !== string2.length) {
+    return false;
+  }
+
+  const countString1 = {};
+  const countString2 = {};
+  for (const element1 of string1) {
+    countString1[element1] = (countString1[element1] || 0) + 1;
+  }
+  for (const element2 of string2) {
+    countString2[element2] = (countString2[element2] || 0) + 1;
+  }
+
+  for (const key in countString1) {
+    if (!(key in countString2)) {
+      return false;
+    }
+
+    if (countString1[key] !== countString2[key]) {
+      return false;
     }
   }
 
-  var temp = numArray[minIdx];
-  numArray[minIdx] = numArray[i];
-  numArray[i] = temp;
-}
-console.log(numArray);
+  return true;
+};
+
+console.log(validAnagram('anagram', 'nagaram')); // true
+console.log(validAnagram('rat', 'car')); // false

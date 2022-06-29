@@ -142,7 +142,7 @@
 ////////////////////////////////////// EXAMPLE #3
 // Create a Fibonacci Series using a for loop
 
-// let input = 7, then output will be 1, 1, 2, 3, 5 , 8, 13 and so on
+// let input = 7, then output will be 0, 1, 1, 2, 3, 5 , 8, 13 and so on
 // find last 2 values
 // add last 2 values to get next value
 // store all values in an array
