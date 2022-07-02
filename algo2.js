@@ -102,7 +102,7 @@
 // console.log(same([1, 2, 3], [4, 1, 9]));
 // console.log(same([1, 2, 3, 2], [4, 1, 9, 1]));
 
-////////////////////////////////////// EXAMPLE #
+////////////////////////////////////// EXAMPLE #2
 // Write a function to check if second string is anagram of first one
 
 // validAnagram('','') // true
@@ -172,7 +172,7 @@
 // console.log(validAnagram('anagram', 'nagaram')); // true
 // console.log(validAnagram('rat', 'car')); // false
 
-////////////////////////////////////// EXAMPLE # (Multiple Pointers Pattern)
+////////////////////////////////////// EXAMPLE #3 (Multiple Pointers Pattern)
 // Write a function called sumZero which accepts a sorted array of integers. The function should find the first pair
 // where the sum is zero. Return an array that includes both values whose sum is zero or return undefined if no pair exist.
 
@@ -182,20 +182,39 @@
 // sumZero([-2, -1, 0, 1, 2, 3, 4]) // [-2, 2]
 // sumZero([-2, -1, 1, 3, 4]); // [-1, 1]
 
-// Solution --
+//------------ Solution#1 -- (Time Complexity is O(n^2))
+// start a loop from 1st element to 2nd last element(because last element cannot be compared with anyother element)
+// start a nested loop from 2nd element to last element and add its elements one by one with each element of loop1.
+// if sum of any pair is zero, return those elements in array like [-3, 3].
+// and if no pair exists with sum equal zero, return undefined
+
+// const sumZero = (arr) => {
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     for (let j = i + 1; j <= arr.length; j++) {
+//       if (Math.abs(arr[j] > Math.abs(arr[i]))) {
+//         // To enhance performance
+//         // as array is sorted, if Math.abs(arr[j]) becomes greater than Math.abs(arr[i]), then no need to move further
+//         break;
+//       }
+
+//       if (arr[i] + arr[j] === 0) {
+//         return [arr[i], arr[j]];
+//       }
+//     }
+//   }
+// };
+// console.log(sumZero([-3, 0, 1, 2])); // [-3, 3]
+
+//------------ Solution#2 (Time Complexity is O(n^2))
 // start a loop from 1st element to 2nd last element(because last element cannot be compared with anyother element)
 // start a nested loop from last element to 2nd element and add its elements one by one with each element of loop1.
 // if sum of any pair is zero, return those elements in array like [-3, 3].
 // and if no pair exists with sum equal zero, return undefined
-// if any value in array is '0' then no need to compare because if zero is in middle, then sum of zero with zero will be zero.
 
 // const sumZero = (arr) => {
 //   for (let i = 0; i < arr.length - 1; i++) {
-//     if (arr[i] === 0) {
-//       break;
-//     }
-//     for (let j = arr.length - 1; j >= 1; j--) {
-//       if (Math.abs(arr[i]) > Math.abs(arr[j])) {
+//     for (let j = arr.length - 1; j >= i + 1; j--) {
+//       if (Math.abs(arr[j]) < Math.abs(arr[i])) {
 //         // To enhance performance
 //         // as array is sorted, if Math.abs(arr[j]) becomes less than Math.abs(arr[i]), then no need to move further
 //         break;
@@ -206,10 +225,56 @@
 //       }
 //     }
 //   }
+// };
+// console.log(sumZero([-3, 0, 1, 2])); // [-3, 3]
 
-//   return undefined;
+//------------ Solution#3 -- more enhanced way (Time Complexity is O(n), Space Complexity is O(1))
+// [[-3, 0, 1, 2, 4]] // initially, -3 is first pointed element and 4 is 2nd pointed element
+// set first pointer on start of array and 2nd pointer on end of array
+// compare first pointed element with 2nd pointed element, if their sum is zero return values
+// As array is sorted in assending order, if 2nd pointed element is greater than first one, change pointer of 2nd element to previous value(2)
+// if sum of 1st and 2nd pointed elements is zero return values and if 2nd pointed element is less than 1st pointed element, change pointer of 1st element to next value(0)
+// NOTE: when we will compare values with greater than or less than operators, always use absolute values
+
+// const sumZero = (arr) => {
+//   let left = 0,
+//     right = arr.length - 1; // last index
+
+//   //   while (1) {
+//   //     if (left === right) return;
+//   while (left < right) {
+//     if (arr[left] + arr[right] === 0) {
+//       return [arr[left], arr[right]];
+//     }
+//     if (Math.abs(arr[right]) > Math.abs(arr[left])) {
+//       // Math.abs(arr[right]) + Math.abs(arr[left] is positive(greater than 0)
+//       right--;
+//     }
+//     if (Math.abs(arr[right]) < Math.abs(arr[left])) {
+//       // Math.abs(arr[right]) + Math.abs(arr[left] is negative(less than zero)
+//       left++;
+//     }
+//   }
 // };
 
-// console.log(sumZero([-3, -2, -1, 0, 1, 2, 3])); // [-3, 3]
+// console.log(sumZero([-3, 0, 1, 2, 3, 4])); // [-3, 3]
 
-////////////
+////////////////////////////////////// EXAMPLE #4
+// Write a function called countUniqueValues, which accepts a sorted array and count the unique values in the array.
+// There can be negative numbers in the array, but it will always be sorted.
+
+// countUniqueValues([1, 1, 1, 1, 1, 2]) // 2
+// countUniqueValues([1, 2, 3, 4, 4, 4, 4, 7, 7, 12, 12, 13 ]) // 7
+// countUniqueValues([]) // 0
+// countUniqueValues([-2, -1, -1, 0, 1]) // 4
+
+const countUniqueValues = (arr) => {
+  const obj = {};
+  for (let i = 0; i < arr.length; i++) {
+    const element = arr[i];
+    obj[element] = (obj[element] || 0) + 1;
+  }
+
+  return Object.keys(obj).length;
+};
+console.log(countUniqueValues([1, 1, 1, 1, 1, 2]));
