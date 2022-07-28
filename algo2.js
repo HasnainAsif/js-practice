@@ -268,13 +268,16 @@
 // countUniqueValues([]) // 0
 // countUniqueValues([-2, -1, -1, 0, 1]) // 4
 
-const countUniqueValues = (arr) => {
-  const obj = {};
-  for (let i = 0; i < arr.length; i++) {
-    const element = arr[i];
-    obj[element] = (obj[element] || 0) + 1;
-  }
+// const countUniqueValues = (arr) => {
+//   const obj = {};
+//   for (let i = 0; i < arr.length; i++) {
+//     const element = arr[i];
+//     obj[element] = (obj[element] || 0) + 1;
+//   }
 
-  return Object.keys(obj).length;
-};
-console.log(countUniqueValues([1, 1, 1, 1, 1, 2]));
+//   return Object.keys(obj).length;
+// };
+// console.log(countUniqueValues([1, 1, 1, 1, 1, 2]));
+// // Solve above problem with multiple pointers pattern
+
+//

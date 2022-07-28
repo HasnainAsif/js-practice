@@ -18,6 +18,51 @@
 // console.log(add());
 // console.log(add());
 
+//////////// STALE CLOSURE
+// let counter = 0;
+// function increment() {
+//   counter++;
+//   let  message = 'Counter is: ' + counter;
+//   return function () {
+//     console.log({ message });
+//     console.log({ counter });
+//   };
+// }
+// const log = increment();
+// increment();
+// log();
+
+//--> Solution #1 to stale closure
+//// declare message variable outside increment function and initialize inside increment function but outside return function
+// let counter = 0;
+// let message;
+// function increment() {
+//   counter++;
+//   message = 'Counter is: ' + counter;
+//   return function () {
+//     console.log({ message });
+//     console.log({ counter });
+//   };
+// }
+// const log = increment();
+// increment();
+// log();
+
+//--> Solution #2 to stale closure
+//// initialize message variable inside of return function
+// let counter = 0;
+// function increment() {
+//   counter++;
+//   return function () {
+//     let message = 'Counter is: ' + counter;
+//     console.log({ message });
+//     console.log({ counter });
+//   };
+// }
+// const log = increment();
+// increment();
+// log();
+
 ////////////////////////////////////////////////// SELF EXECUTING/INVOKING FUNCTION or Immediately Invoked Function Expression (IIFE)
 //// Run one time only just like in above example
 //// after execution we loose the reference to function unlike named functions whose declared name is their reference from which we can call that function again

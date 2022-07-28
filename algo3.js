@@ -54,11 +54,3 @@
 //   numArray[i] = temp;
 // }
 // console.log(numArray);
-
-// QUESTION
-//-- Merge two arrays and remove duplicated values from them
-// merge([1,2,3,4],[2,5,4,3]) // output: [1, 2, 3, 4, 5]
-
-// Q# Check if a value is a palindrome or not
-
-// Q# create palindrom from an input
