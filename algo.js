@@ -333,3 +333,39 @@
 // }
 
 // console.log(findLongestStr(['asd', 'ewqqw', 'asddss', 'ympvw']));
+
+////////////////////////////////////// EXAMPLE #7 (remove duplicated values)
+// const arr = [1, 1, 3, 5, 6, 5, 2, 3, 1];
+
+// const obj = {}
+// for (const value of arr) {
+//     obj[value] = value
+// }
+
+// const uniqueValues = Object.values(obj)
+// console.log(uniqueValues)
+
+////
+// const arr = ['a', 'b', 'd', 'a', 'p', 'd'];
+
+// const obj = {}
+// for (const value of arr) {
+//     obj[value] = value
+// }
+
+// // const uniqueValues = Object.keys(obj)
+// const uniqueValues = Object.values(obj)
+// console.log(uniqueValues)
+
+//// OTHER WAY:
+// const arr = ['a', 'b', 'd', 'a', 'p', 'd'];
+
+// const uniqueValues = []
+// for (const value of arr) {
+//     if(uniqueValues.indexOf(value) !== -1) continue
+    
+//     uniqueValues.push(value)
+// }
+
+
+// console.log(uniqueValues)
