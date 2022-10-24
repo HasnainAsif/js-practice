@@ -79,3 +79,18 @@ console.log(addCounter());
 // const log = increment();
 // increment();
 // log();
+
+//--> Solution #2 to stale closure
+//// initialize message variable inside of return function
+// let counter = 0;
+// function increment() {
+//   counter++;
+//   return function () {
+//     let message = 'Counter is: ' + counter;
+//     console.log({ message });
+//     console.log({ counter });
+//   };
+// }
+// const log = increment();
+// increment();
+// log();
