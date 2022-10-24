@@ -11,7 +11,7 @@ const person = {
     console.log(`My name is ${this.name}`);
   },
 };
-// person.sayMyname();
+// person.sayMyname(); // this will be previous value of ".". In this case it is "person"
 
 //// Explicit Binding
 function sayMyName() {
@@ -32,5 +32,6 @@ sayMyName.call(person); // call is explained later
 // console.log(p2.name)
 
 //// Default(Global) Binding
+// const name = 'Hasnain' // for declaring global variable in browser
 globalThis.name = 'Hasnain'; // except this, sayMyName will return undefined
 sayMyName();
